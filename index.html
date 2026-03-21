@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tina的个人主页</title>
+    <style>
+        :root {
+            --primary: #f97316;
+            --bg: #f9fafb;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 32px 20px;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center 30%;
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 16px 0;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tag {
+            background: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--text-main);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            font-weight: 500;
+        }
+
+        /* Section Headings */
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 32px 0 16px 0;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+        }
+        
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background-color: var(--primary);
+            border-radius: 2px;
+            margin-right: 8px;
+        }
+
+        /* Accordion Cards */
+        .accordion-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header {
+            padding: 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .header-toggle {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-body {
+            padding: 0 20px 20px 20px;
+            border-top: 1px solid #f3f4f6;
+            padding-top: 16px;
+        }
+
+        .accordion-body h4 {
+            margin: 0 0 12px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .accordion-body p {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #4b5563;
+        }
+
+        .accordion-body ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+            color: #4b5563;
+        }
+
+        .accordion-body li {
+            margin-bottom: 8px;
+        }
+        
+        .accordion-body strong {
+            color: var(--text-main);
+        }
+
+        /* Images Grid */
+        .series {
+            margin-bottom: 24px;
+        }
+        
+        .series:last-child {
+            margin-bottom: 0;
+        }
+
+        .series-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #f3f4f6;
+        }
+
+        /* Simple Card */
+        .simple-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            text-align: center;
+        }
+
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .card-subtitle {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .primary-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 24px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: opacity 0.2s;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+        }
+
+        .primary-button:active {
+            opacity: 0.8;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .contact-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .contact-icon {
+            font-size: 24px;
+            margin-right: 16px;
+            width: 40px;
+            height: 40px;
+            background: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .contact-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <img src="https://cdn.gooo.ai/gen-images/2c62c4fc0d595f03a19a53390bc06beb3ea291b2c26f3d8f35a7bb9031965f58@chat" alt="Tina的头像" class="avatar">
+            <h1>Hi, 我是Tina 🍊</h1>
+            <div class="tags">
+                <span class="tag">私募股权基金运营</span>
+                <span class="tag">AIGC创作者</span>
+                <span class="tag">脱不花狂热粉丝</span>
+                <span class="tag">脱口秀一级爱好者</span>
+            </div>
+        </div>
+
+        <!-- Section: 我 -->
+        <h2>我</h2>
+
+        <!-- Work -->
+        <div class="accordion-card">
+            <div class="accordion-header" onclick="toggleAccordion('work-body', 'work-icon')">
+                <div class="header-title">💼 职场中的我</div>
+                <div class="header-subtitle">私募股权基金运营，追求极致效率的"表姐"</div>
+                <div class="header-toggle">
+                    <span>查看经历</span>
+                    <span id="work-icon" class="toggle-icon">▼</span>
+                </div>
+            </div>
+            <div class="accordion-body" id="work-body" style="display: none;">
+                <h4>工作经历</h4>
+                <p>📅 2015至今: 私募股权基金运营</p>
+                <br>
+                <h4>日常工作</h4>
+                <ul>
+                    <li>📊 <strong>填表狂魔</strong> - 基金备案、季报年报、信息披露……各种表格填到手软，所以被戏称"表姐"。但我偏不认命，能用脚本自动化的绝不手填！</li>
+                    <li>🏦 <strong>银行托管对接</strong> - 天天跟银行打交道，募集、托管、监管……感觉自己都快成银行VIP了😂</li>
+                    <li>📝 <strong>协会备案专家</strong> - 基金业协会的各种平台我闭着眼睛都能操作，备案材料准备、合规披露，样样精通(被逼的)</li>
+                    <li>🔄 <strong>流程优化狂人</strong> - 发现重复工作？立马想办法优化！写脚本、做模板、建系统，人生苦短，效率至上！</li>
+                    <li>📂 <strong>档案管理达人</strong> - 投后档案、合同文件、各种材料……整理得明明白白，需要的时候3秒找到！</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Art -->
+        <div class="accordion-card">
+            <div class="accordion-header" onclick="toggleAccordion('art-body', 'art-icon')">
+                <div class="header-title">🎨 艺术中的我</div>
+                <div class="header-subtitle">用提示词驯服AI，具象化脑海中的奇思妙想</div>
+                <div class="header-toggle">
+                    <span>浏览作品</span>
+                    <span id="art-icon" class="toggle-icon">▼</span>
+                </div>
+            </div>
+            <div class="accordion-body" id="art-body" style="display: none;">
+                <h4>我的AIGC创作系列</h4>
+                
+                <div class="series">
+                    <div class="series-title">👑 系列1: 迪士尼公主浴袍系列</div>
+                    <p>当迪士尼公主穿上浴袍，法式浪漫、意式风情、鬼马精灵...每一个都是梦幻与现实的完美碰撞</p>
+                    <div class="image-grid">
+                        <img src="https://cdn.gooo.ai/gen-images/3bd1d146f8b1046101344ca5a5640b66d6d6c6fbb8432ba744dde0ff9aeb95c6@chat" alt="法式浪漫">
+                        <img src="https://cdn.gooo.ai/gen-images/68cbc5cc8a2e0084e49703ec05a30fa988624057a582a9f25790517f774114f5@chat" alt="鬼马精灵">
+                        <img src="https://cdn.gooo.ai/gen-images/a37836744f8c45257bcc8a4d26528d06e36e6a3d3839e881f1c086a47f4f4a8b@chat" alt="金色华章">
+                        <img src="https://cdn.gooo.ai/gen-images/cd8bc2d5a3b8c75182bb0fafed748022e4d3f1aa4def9cc2ed46daa1684dbd32@chat" alt="蓝调优雅">
+                    </div>
+                </div>
+
+                <div class="series">
+                    <div class="series-title">🖼️ 系列2: 名画系列</div>
+                    <p>橘猫Tina的名画穿越之旅，当经典艺术遇见调皮猫咪，营业中、下班啦、有人来了、闭馆约会去...</p>
+                    <div class="image-grid">
+                        <img src="https://cdn.gooo.ai/user-files/b138cde8aa726a3fa3a26f2c3ed6d3a9b72fd5556892b9e125214e03bef67a4f@chat" alt="名画系列1">
+                        <img src="https://cdn.gooo.ai/user-files/220916d4dfc878fb321d9d9754ca0b9dc29b7074c01d0e3d6bcdb3c143a5fc21@chat" alt="名画系列2">
+                        <img src="https://cdn.gooo.ai/user-files/2c5d3e727745b2efb8ef96fef2e6d670257e825d6978b8b327b0b1fc4e4c78f1@chat" alt="名画系列3">
+                        <img src="https://cdn.gooo.ai/user-files/10032ffffad1b605db7708239ab70f3c77070099818529661f4fc85febccf9a5@chat" alt="名画系列4">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Life -->
+        <div class="accordion-card">
+            <div class="accordion-header" onclick="toggleAccordion('life-body', 'life-icon')">
+                <div class="header-title">🌟 生活中的我</div>
+                <div class="header-subtitle">人生两大刚需:听脱不花,看脱口秀</div>
+                <div class="header-toggle">
+                    <span>了解更多</span>
+                    <span id="life-icon" class="toggle-icon">▼</span>
+                </div>
+            </div>
+            <div class="accordion-body" id="life-body" style="display: none;">
+                <h4>我的脱口秀观看史 🎤</h4>
+                <p>从《吐槽大会》到《主咖和TA的朋友们》，一集不落！</p>
+                <p>最喜欢的脱口秀演员：<strong>呼兰</strong></p>
+                <p>为什么喜欢脱口秀？因为它让我在焦虑的深夜找到共鸣，在重复的工作中找到笑点。每个段子背后都是对生活的洞察，每次大笑都是对平凡的和解。</p>
+            </div>
+        </div>
+
+        <!-- Section: AI实践手帐 -->
+        <h2>AI实践手帐</h2>
+        <div class="simple-card">
+            <div class="card-icon">📔</div>
+            <div class="card-subtitle">持续积累迭代中...</div>
+            <p class="card-text">这里记录了我在AI领域的探索与实践，从工具使用到创作分享，从效率优化到思维迭代。每一次尝试都是一次成长，每一个作品都是一份记录。</p>
+            <a href="./handbook.html" target="_blank" rel="noopener noreferrer" class="primary-button">📔 打开手帐 →</a>
+        </div>
+
+        <!-- Section: 联系我呀 -->
+        <h2>联系我呀 🤙</h2>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <div class="contact-info">
+                    <div class="contact-label">邮箱</div>
+                    <div class="contact-value">chenlihua@cscapital.cn</div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <div class="contact-info">
+                    <div class="contact-label">电话</div>
+                    <div class="contact-value">15618022299</div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <div class="contact-info">
+                    <div class="contact-label">小红书 / 抖音</div>
+                    <div class="contact-value">Tina</div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📢</div>
+                <div class="contact-info">
+                    <div class="contact-label">公众号 / 视频号</div>
+                    <div class="contact-value">Tina橙子的橙</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(bodyId, iconId) {
+            const body = document.getElementById(bodyId);
+            const icon = document.getElementById(iconId);
+            
+            if (body.style.display === "none" || body.style.display === "") {
+                body.style.display = "block";
+                icon.style.transform = "rotate(180deg)";
+            } else {
+                body.style.display = "none";
+                icon.style.transform = "rotate(0deg)";
+            }
+        }
+    </script>
+</body>
+</html>
