@@ -320,7 +320,7 @@
             <!-- 手帐内容将由 JS 动态渲染 -->
         </main>
 
-        <div class="add-new-week" onclick="alert('这里可以连接表单，未来用于添加新一周的记录哦！')">
+        <div class="add-new-week" onclick="alert('下周只需@「更新Tina的AI实践手帐」技能,发送新的清单,就会自动为你更新手帐～')">
             <div class="add-icon">✨</div>
             <div>开启新的一周记录...</div>
         </div>
@@ -333,11 +333,92 @@
         // ==========================================
         const scrapbookData = [
             {
+                id: "week12",
+                dateRange: "2026.03.16 - 2026.03.22",
+                weekNum: "第12周",
+                summary: "完成8项任务 | 节约约20-30小时 | 创建多个工具",
+                isOpen: true, // 第12周默认展开
+                tasks: [
+                    {
+                        icon: "🔧",
+                        title: "任务1：【暂时未成功】私募文档智能命名工具开发",
+                        desc: "探索和开发私募文档智能命名工具，经历多次迭代和技术尝试",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "约15-23小时",
+                        outcome: "工具 V11.0 + 技术积累",
+                        color: "var(--yellow-light)"
+                    },
+                    {
+                        icon: "📄",
+                        title: "任务2：私募股权基金出资证明书批量制作与格式优化",
+                        desc: "批量制作并优化格式，完成8位投资人的出资证明书",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "0.5小时",
+                        outcome: "完成8位投资人出资证明书",
+                        color: "var(--pink-light)"
+                    },
+                    {
+                        icon: "🖨️",
+                        title: "任务3：企业发票排版打印工具开发",
+                        desc: "开发纯前端发票打印工具，单HTML文件开箱即用",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "月度节约16-24小时",
+                        outcome: "纯前端发票打印工具（单HTML开箱即用）",
+                        color: "var(--blue-light)"
+                    },
+                    {
+                        icon: "📱",
+                        title: "任务4：公众号运营工具开发",
+                        desc: "开发本地公众号运营工具，提升内容管理效率",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "节约30分钟/篇",
+                        outcome: "纯HTML本地运营工具（wechat-tool/index.html）",
+                        color: "var(--green-light)"
+                    },
+                    {
+                        icon: "🔍",
+                        title: "任务5：【暂时未成功】公众号自动抓取方案探索总结",
+                        desc: "探索公众号自动抓取的多种技术方案，形成完整总结",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "节约大量试错时间",
+                        outcome: "完整探索总结 + 经验沉淀",
+                        color: "var(--purple-light)"
+                    },
+                    {
+                        icon: "📊",
+                        title: "任务6：基金绩效指标计算与校准",
+                        desc: "计算和校准基金关键绩效指标（GIRR、DPI、TVPI）及基金价值占比",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "约1.5小时",
+                        outcome: "精准绩效数据 + 可复用计算Skill + Excel公式模板",
+                        color: "var(--orange-light)"
+                    },
+                    {
+                        icon: "🖨️",
+                        title: "任务7：纳税申报表批量打印需求对接与方案设计",
+                        desc: "设计Excel批量转PDF合并打印的自动化方案",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "约2-3小时",
+                        outcome: "Excel批量转PDF合并一键打印工具",
+                        color: "var(--yellow-light)"
+                    },
+                    {
+                        icon: "🌐",
+                        title: "任务8：使用GitHub Pages实现个人网页固定网址",
+                        desc: "通过GitHub Pages实现个人网页固定网址，避免名片重印",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "一次性设置30分钟，每周更新仅20秒，节约名片重印成本",
+                        outcome: "固定网址 + 配套文档 + 更新名片 + GitHub Pages技能掌握",
+                        color: "var(--pink-light)"
+                    }
+                ]
+            },
+            {
                 id: "week11",
                 dateRange: "2026.03.09 - 2026.03.15",
                 weekNum: "第11周",
                 summary: "完成17项任务 | 节约约30-50小时 | 创建4个技能 | 生成多个附件",
-                isOpen: true, // 默认展开第一周
+                isOpen: false, // 默认收起第11周
                 tasks: [
                     {
                         icon: "📝", 
@@ -492,6 +573,8 @@
                 
                 let tasksHtml = '';
                 week.tasks.forEach(task => {
+                    // 支持动态的时间标签，默认退回至"⏰ 节约时间："
+                    const timeLabel = task.timeLabel || '⏰ 节约时间：';
                     tasksHtml += `
                         <div class="sticky-note" style="background-color: ${task.color}">
                             <div class="task-header">
@@ -500,7 +583,7 @@
                             </div>
                             <div class="task-desc">${task.desc}</div>
                             <div class="task-meta">
-                                <p><span class="meta-label">⏰ 节约时间：</span>${task.time}</p>
+                                <p><span class="meta-label">${timeLabel}</span>${task.time}</p>
                                 <p><span class="meta-label">✨ 成果：</span><br>${task.outcome}</p>
                             </div>
                         </div>
