@@ -320,7 +320,7 @@
             <!-- 手帐内容将由 JS 动态渲染 -->
         </main>
 
-        <div class="add-new-week" onclick="alert('下周只需@「更新Tina的AI实践手帐」技能,发送新的清单,就会自动为你更新手帐～')">
+        <div class="add-new-week" onclick="alert('下周只需@「更新Tina的AI实践手帐」技能，发送新的清单，就会自动为你更新手帐～')">
             <div class="add-icon">✨</div>
             <div>开启新的一周记录...</div>
         </div>
@@ -333,11 +333,92 @@
         // ==========================================
         const scrapbookData = [
             {
+                id: "week13",
+                dateRange: "2026.03.23 - 2026.03.29",
+                weekNum: "第13周",
+                summary: "完成8项任务 | 节约约2-4小时 | 创建多个自动化工具",
+                isOpen: true, // 第13周默认展开
+                tasks: [
+                    {
+                        icon: "🔧",
+                        title: "任务1：【摸索中】GitHub获取Gstack项目安装至WorkBuddy",
+                        desc: "持续探索中，项目部署摸索+开发经理角色实践",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "持续探索中",
+                        outcome: "项目部署摸索+开发经理角色实践",
+                        color: "var(--yellow-light)"
+                    },
+                    {
+                        icon: "📚",
+                        title: "任务2：Get笔记 知识库智能整理",
+                        desc: "系统化归档Get笔记内容，建立结构化知识库",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "节约大量手动分类时间",
+                        outcome: "5个结构化知识库+347条笔记系统化归档",
+                        color: "var(--blue-light)"
+                    },
+                    {
+                        icon: "💰",
+                        title: "任务3：八期分配指令收款账户信息提取与整理",
+                        desc: "从分配指令中精准提取并整理收款账户信息",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "约20-30分钟",
+                        outcome: "13条账户信息精准提取+格式化Excel表格",
+                        color: "var(--green-light)"
+                    },
+                    {
+                        icon: "📄",
+                        title: "任务4：股东会 Word 文档排版优化",
+                        desc: "统一标题样式，优化文档排版格式",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "约15-20分钟",
+                        outcome: "统一标题样式 + 排版优化文档完成",
+                        color: "var(--pink-light)"
+                    },
+                    {
+                        icon: "🛠️",
+                        title: "任务5：安装IMA Skill并整理IMA知识库",
+                        desc: "将WorkBuddy定期任务内容迁入IMA知识库",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "节约手动迁移整理时间",
+                        outcome: "WorkBuddy定期任务内容迁入IMA知识库",
+                        color: "var(--purple-light)"
+                    },
+                    {
+                        icon: "🔄",
+                        title: "任务6：Get笔记知识库合并 + 每周速递自动化",
+                        desc: "开发自动化脚本，实现知识库合并和每周速递生成",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "节约30分钟/周",
+                        outcome: "自动化脚本+每周六定时生成速递",
+                        color: "var(--orange-light)"
+                    },
+                    {
+                        icon: "📮",
+                        title: "任务7：Get笔记每周速递+成长回顾",
+                        desc: "自动拉取分类Get笔记，生成每周速递和成长回顾",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "节约每周手动整理和回顾时间",
+                        outcome: "Get笔记自动拉取分类+周六21:00生成速递+成长回顾一体版",
+                        color: "var(--yellow-light)"
+                    },
+                    {
+                        icon: "📊",
+                        title: "任务8：3月成长清单自动化生成",
+                        desc: "读取Get笔记3月内容，筛选素材并生成成长清单",
+                        timeLabel: "⏰ 节约时间：",
+                        time: "约1-2小时",
+                        outcome: "Get笔记3月内容读取+素材筛选确认+成长清单初稿生成",
+                        color: "var(--blue-light)"
+                    }
+                ]
+            },
+            {
                 id: "week12",
                 dateRange: "2026.03.16 - 2026.03.22",
                 weekNum: "第12周",
                 summary: "完成8项任务 | 节约约20-30小时 | 创建多个工具",
-                isOpen: true, // 第12周默认展开
+                isOpen: false, // 默认收起
                 tasks: [
                     {
                         icon: "🔧",
